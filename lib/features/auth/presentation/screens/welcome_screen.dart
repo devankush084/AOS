@@ -31,7 +31,6 @@ class WelcomeScreen extends ConsumerWidget {
             ),
           ),
 
-          /// 🔥 MAIN UI
           SafeArea(
             child: Center(
               child:
