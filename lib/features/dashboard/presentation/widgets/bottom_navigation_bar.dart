@@ -1,4 +1,4 @@
-import 'package:appisoft_project/dashboard/screen/student_dashboard.dart';
+import 'package:aos/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
