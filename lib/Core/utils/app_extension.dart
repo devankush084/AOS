@@ -119,6 +119,27 @@ extension TextStyleExtension on Text {
       letterSpacing: letterSpacing,
     );
   }
+
+  Text extrabold({
+    double? size,
+    Color? color,
+    TextAlign? textAlign,
+    int? maxLines,
+    TextOverflow? overflow,
+    double? height,
+    double? letterSpacing,
+  }) {
+    return _applyStyle(
+      size: size,
+      color: color,
+      weight: FontWeight.w900,
+      textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: overflow,
+      height: height,
+      letterSpacing: letterSpacing,
+    );
+  }
 }
 
 /// =======================

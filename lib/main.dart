@@ -4,6 +4,8 @@ import 'package:aos/config/routes/route_names.dart';
 import 'package:aos/Core/widgets/network_listener.dart';
 import 'package:aos/features/ai/presentation/screens/ai_chat_screen.dart';
 import 'package:aos/features/ai/presentation/screens/ai_tutor.dart';
+import 'package:aos/features/ai/presentation/screens/chat_page.dart';
+import 'package:aos/features/courses/presentation/screens/course_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // ✅ ADD THIS
@@ -27,7 +29,7 @@ class MyApp extends ConsumerWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
-          home: const AiChatScreen(),
+          home: const CourseDetailScreen(),
 
           // initialRoute: AppNames.splash,
           // onGenerateRoute: AppRouter.generateRoute,

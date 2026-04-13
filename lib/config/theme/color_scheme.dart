@@ -20,6 +20,9 @@ class AppColors {
   static const gradientStart = Color(0xFF6A5AE0);
   static const gradientEnd = Color(0xFF7B6EF6);
 
+  /// scaffold gradient
+  static const scaffoldGradientStart = Color(0xFF6247F8);
+  static const Color  scaffoldGradientCenter  =  Color(0xFFC3BAFB);
 
   static const Color appBarColor = Color(0xFF8358FE);
   static const Color white = Color(0xFFFFFFFF);
@@ -29,4 +32,7 @@ class AppColors {
   static const Color sendButtonColor  =   Color(0xFF4F3598);
   static const Color fontColor  =   Color(0xFF747373);
   static const Color chipBackground  =   Color(0xFF6500E2);
+  static const Color colorDAD6D6  =   Color(0xFFDAD6D6);
+  static const Color colorA8A6A6 =   Color(0xFFA8A6A6);
+  static const Color color4E4E4E =   Color(0xFF4E4E4E);
 }

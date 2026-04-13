@@ -16,4 +16,6 @@ class AppImages {
   static const profileImage = 'assets/images/profile_image.png';
   static const sendButton = 'assets/images/send_button.png';
   static const aiTutor = 'assets/images/ai_tutor.png';
+  static const aiChat = 'assets/images/ai_chat.png';
+  static const chatBot = 'assets/images/chat_bot.png';
 }
