@@ -76,7 +76,7 @@ class _CourseItem extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
-                      "assets/images/book.jpeg",
+                      "assets/images/Course1.png",
                       fit: BoxFit.cover,
                     ),
                   ),

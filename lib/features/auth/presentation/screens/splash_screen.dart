@@ -1,10 +1,10 @@
 import 'package:aos/Core/utils/app_sizes.dart';
 import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
-import 'package:aos/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../Core/constants/app_images.dart';
 import '../providers/splash_provider.dart';
 
 class SplashScreen extends ConsumerWidget {

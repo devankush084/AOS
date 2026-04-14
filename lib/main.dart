@@ -8,7 +8,9 @@ import 'package:aos/features/ai/presentation/screens/chat_page.dart';
 import 'package:aos/features/courses/presentation/screens/course_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; // ✅ ADD THIS
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/dashboard/presentation/widgets/bottom_navigation_bar.dart'; // ✅ ADD THIS
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -29,7 +31,7 @@ class MyApp extends ConsumerWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
-          home: const CourseDetailScreen(),
+          home: const FloatingNavBar2(),
 
           // initialRoute: AppNames.splash,
           // onGenerateRoute: AppRouter.generateRoute,

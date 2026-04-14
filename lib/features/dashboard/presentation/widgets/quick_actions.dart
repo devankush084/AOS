@@ -34,7 +34,7 @@ class QuickActions extends StatelessWidget {
   }
 
   // 🔹 Reusable Widget
-  Widget _buildItem(FaIconData icon, double boxSize, double iconSize) {
+  Widget _buildItem(IconData icon, double boxSize, double iconSize) {
     return Container(
       height: boxSize,
       width: boxSize,

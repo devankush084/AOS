@@ -1,3 +1,4 @@
+import 'package:aos/Core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
 
 class NotificationWidget extends StatelessWidget {

@@ -2,6 +2,9 @@ import 'package:aos/features/dashboard/presentation/screens/dashboard_screen.dar
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../ai/presentation/screens/ai_chat_screen.dart';
+import '../../../ai/presentation/screens/ai_tutor.dart';
+
 class FloatingNavBar2 extends StatefulWidget {
   const FloatingNavBar2({super.key});
 
@@ -15,7 +18,7 @@ class _FloatingNavBar2State extends State<FloatingNavBar2> {
   final List<Widget> pages = [
     StudentDashboard(),
     Container(),
-    Container(),
+    AiTutorScreen(),
     Container(),
   ];
 
@@ -49,7 +52,7 @@ class _FloatingNavBar2State extends State<FloatingNavBar2> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    buildItem(FontAwesomeIcons.solidHouse, "Home", 0),
+                    buildItem(FontAwesomeIcons.home, "Home", 0),
                     buildItem(FontAwesomeIcons.bookOpen, "Courses", 1),
                     buildItem(FontAwesomeIcons.robot, "Ai Tutor", 2),
                     buildItem(FontAwesomeIcons.user, "Profile", 3),
@@ -63,7 +66,7 @@ class _FloatingNavBar2State extends State<FloatingNavBar2> {
     );
   }
 
-  Widget buildItem(FaIconData icon, String label, int index) {
+  Widget buildItem(IconData icon, String label, int index) {
     final isSelected = selectedIndex == index;
 
     return GestureDetector(
