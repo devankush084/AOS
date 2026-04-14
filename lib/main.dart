@@ -6,6 +6,8 @@ import 'package:aos/features/ai/presentation/screens/ai_chat_screen.dart';
 import 'package:aos/features/ai/presentation/screens/ai_tutor.dart';
 import 'package:aos/features/ai/presentation/screens/chat_page.dart';
 import 'package:aos/features/courses/presentation/screens/course_detail_screen.dart';
+import 'package:aos/features/courses/presentation/screens/course_overview_screen.dart';
+import 'package:aos/features/dashboard/presentation/widgets/bottom_navigation_bar.dart' hide FloatingNavBar2;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +33,11 @@ class MyApp extends ConsumerWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
+
           home: const FloatingNavBar2(),
+
+          // home: const CourseOverviewScreen(),
+
 
           // initialRoute: AppNames.splash,
           // onGenerateRoute: AppRouter.generateRoute,

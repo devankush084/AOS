@@ -1,3 +1,4 @@
+import 'package:aos/features/courses/presentation/screens/course_detail_screen.dart';
 import 'package:aos/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,8 +18,12 @@ class _FloatingNavBar2State extends State<FloatingNavBar2> {
 
   final List<Widget> pages = [
     StudentDashboard(),
+
     Container(),
     AiTutorScreen(),
+    CourseDetailScreen(),
+    Container(),
+
     Container(),
   ];
 

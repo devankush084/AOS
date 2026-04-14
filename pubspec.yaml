@@ -48,6 +48,9 @@ dependencies:
 
   fluttertoast: ^8.2.14
 
+
+  flutter_rating_stars:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

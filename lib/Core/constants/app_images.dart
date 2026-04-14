@@ -18,4 +18,7 @@ class AppImages {
   static const aiTutor = 'assets/images/ai_tutor.png';
   static const aiChat = 'assets/images/ai_chat.png';
   static const chatBot = 'assets/images/chat_bot.png';
+  static const courseImage = 'assets/images/courses_detail.png';
+  static const courseOverView = 'assets/images/course_overView.png';
+  static const courseTeacher = 'assets/images/course_teacher.png';
 }

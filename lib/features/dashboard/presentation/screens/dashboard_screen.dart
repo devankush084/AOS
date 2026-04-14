@@ -102,7 +102,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
                       child: ClipRRect(
                         child: Image.asset(
-                          "assets/images/ai_tutor.png",
+
+
+                          "assets/images/ai_photo1.png",
+
                           height: 250,
                           width: 250,
                         ),
@@ -140,7 +143,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.asset(
+
                           "assets/images/Course1.png",
+
+
+
                           width: 100,
                           height: 80,
                           fit: BoxFit.cover,
