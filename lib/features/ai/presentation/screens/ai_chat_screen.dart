@@ -7,11 +7,13 @@
   import 'package:aos/features/ai/presentation/providers/text_to_speech_model.dart';
   import 'package:aos/features/ai/presentation/providers/text_to_speech_provider.dart';
   import 'package:aos/features/ai/presentation/screens/speech_to_text_screen.dart';
+import 'package:aos/features/ai/presentation/widgets/chat_history.dart';
   import 'package:aos/features/ai/presentation/widgets/dialog_box.dart';
   import 'package:aos/features/ai/presentation/widgets/suggestion_chip_widget.dart';
   import 'package:flutter/material.dart';
   import 'package:flutter_riverpod/flutter_riverpod.dart';
   import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
   class AiChatScreen extends ConsumerStatefulWidget {
     const AiChatScreen({super.key});
@@ -110,22 +112,35 @@
           ),
         ),
         child: Scaffold(
+          drawer: const ChatHistory(),
           resizeToAvoidBottomInset: true,
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            actions: [
+               GestureDetector(
+                   onTap: (){
+                     ref.read(chatProvider.notifier).clearChat();
+                   },
+
+
+                   child: FaIcon(FontAwesomeIcons.edit,color: Colors.white,).paddingOnly(right: 20))
+
+            ],
             backgroundColor: AppColors.appBarColor,
             title: const Text("Yana Ai tutor")
                 .bold(color: AppColors.white, size: AppDimensions.d20.sp),
             centerTitle: true,
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
+            leading: Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: const Icon(Icons.menu, color: AppColors.white),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
               },
-              child: const Icon(
-                Icons.arrow_back,
-                color: AppColors.white,
-              ).paddingOnly(left: AppDimensions.d30.w),
             ),
+
           ),
           body: SafeArea(
             child: Stack(
@@ -303,9 +318,7 @@
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: AppDimensions.d60.h,
-                    ),
+
                     if (chatState.messages.isEmpty) ...[
                       Padding(
                         padding: const EdgeInsets.only(bottom: 50),
@@ -331,11 +344,12 @@
                           decoration: BoxDecoration(
                             color: AppColors.white,
                             borderRadius:
-                                BorderRadius.circular(AppDimensions.d10.r),
+                            BorderRadius.circular(AppDimensions.d10.r),
                           ),
                           padding: EdgeInsets.symmetric(
-                              horizontal: AppDimensions.d10.w,
-                              vertical: AppDimensions.d8.h),
+                            horizontal: AppDimensions.d10.w,
+                            vertical: AppDimensions.d8.h,
+                          ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -351,8 +365,7 @@
                                       return Stack(
                                         children: [
                                           Container(
-                                            margin:
-                                                const EdgeInsets.only(right: 8),
+                                            margin: const EdgeInsets.only(right: 8),
                                             child: ClipRRect(
                                               borderRadius: BorderRadius.circular(
                                                   AppDimensions.d8.r),
@@ -369,8 +382,7 @@
                                             right: 0,
                                             child: GestureDetector(
                                               onTap: () => ref
-                                                  .read(imagePickerProvider
-                                                      .notifier)
+                                                  .read(imagePickerProvider.notifier)
                                                   .removeImage(index),
                                               child: CircleAvatar(
                                                 radius: AppDimensions.d9.r,
@@ -388,20 +400,25 @@
                                     },
                                   ),
                                 ),
+
                               if (imagePicker.images.isNotEmpty)
                                 SizedBox(height: AppDimensions.d4.h),
+
+                              /// 🔥 ONLY HEIGHT FIX HERE
                               ConstrainedBox(
                                 constraints: BoxConstraints(
-                                  minHeight: AppDimensions.d40.h,
-                                  maxHeight: AppDimensions.d100.w,
+                                  minHeight: AppDimensions.d50.h,
+                                  maxHeight: imagePicker.images.isNotEmpty
+                                      ? AppDimensions.d120.h
+                                      : AppDimensions.d55.h,
                                 ),
                                 child: TextField(
                                   controller: messageController,
-                                  maxLines: 1,
+                                  maxLines: null, // 🔥 important for expansion
                                   keyboardType: TextInputType.multiline,
                                   decoration: InputDecoration(
                                     hintText:
-                                        "Ask Yana Ai anything about your lesson",
+                                    "Ask Yana Ai anything about your lesson",
                                     hintStyle: TextStyle(
                                       fontSize: AppDimensions.d13.sp,
                                       color: AppColors.fontColor,
@@ -414,8 +431,7 @@
                                               color: Color(0xCC8459FE)),
                                           onPressed: () {
                                             ref
-                                                .read(
-                                                    imagePickerProvider.notifier)
+                                                .read(imagePickerProvider.notifier)
                                                 .pickFromGallery();
                                             FocusScope.of(context).unfocus();
                                           },
@@ -428,7 +444,6 @@
                                             color: const Color(0xCC8459FE),
                                           ),
                                           onPressed: () async {
-
                                             ref
                                                 .read(speechProvider.notifier)
                                                 .startListening();
@@ -437,7 +452,7 @@
                                               context: context,
                                               barrierDismissible: false,
                                               builder: (context) =>
-                                                  const SpeechDialog(),
+                                              const SpeechDialog(),
                                             );
 
                                             ref
@@ -455,7 +470,9 @@
                           ),
                         ),
                       ),
+
                       SizedBox(width: AppDimensions.d15.w),
+
                       GestureDetector(
                         onTap: () {
                           final notifier = ref.read(chatProvider.notifier);
@@ -465,20 +482,20 @@
                             notifier.editMessage(editController.text);
                           } else {
                             notifier.sendMessage(
-                                messageController.text,imagePicker.images, context);
+                                messageController.text,
+                                imagePicker.images,
+                                context);
                           }
 
                           messageController.clear();
                           ref.read(imagePickerProvider.notifier).clearImages();
-
-
                         },
                         child: Container(
-                          height: AppDimensions.d60.h,
-                          width: AppDimensions.d60.w,
+                          height: AppDimensions.d55.h,
+                          width: AppDimensions.d50.w,
                           decoration: BoxDecoration(
                             borderRadius:
-                                BorderRadius.circular(AppDimensions.d10.r),
+                            BorderRadius.circular(AppDimensions.d10.r),
                             gradient: const LinearGradient(colors: [
                               Color(0xCC8459FE),
                               Color(0xFF4F3598),

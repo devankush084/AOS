@@ -36,6 +36,13 @@ class ChatNotifier extends StateNotifier<ChatState> {
     state = state.copyWith(messages: updatedList);
   }
 
+  void clearChat() {
+    state = state.copyWith(
+      messages: [],
+      editingIndex: null,
+    );
+  }
+
   void copyMessage(String text, BuildContext context) {
     Clipboard.setData(ClipboardData(text: text));
 

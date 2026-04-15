@@ -34,9 +34,9 @@ class MyApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
 
-          home: const FloatingNavBar2(),
+          // home: const FloatingNavBar2(),
 
-          // home: const CourseOverviewScreen(),
+          home: CourseOverviewScreen(),
 
 
           // initialRoute: AppNames.splash,
