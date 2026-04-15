@@ -132,22 +132,18 @@ class VideoControllerNotifier extends StateNotifier<VideoState> {
   }
 
   /// FULLSCREEN
-  void toggleFullscreen() {
+  Future<void> toggleFullscreen(BuildContext context) async {
     if (controller == null || !controller!.value.isInitialized) return;
 
-    final isNowFullscreen = !state.isFullscreen;
-
-    state = state.copyWith(isFullscreen: isNowFullscreen);
-
-    /// 🔥 Optional: immersive mode (hide status bar)
-    if (isNowFullscreen) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    } else {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    }
-
-    _startHideTimer();
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const FullScreenVideoPage(),
+      ),
+    );
   }
+
+
 
   @override
   void dispose() {
