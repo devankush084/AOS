@@ -24,6 +24,7 @@ class _CourseModuleScreenState extends ConsumerState<CourseModuleScreen> {
         ),
       ),
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: AppColors.appBarColor,
           centerTitle: true,

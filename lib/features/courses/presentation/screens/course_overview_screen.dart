@@ -28,7 +28,7 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
 
     Future.microtask(() {
       ref.read(videoProvider.notifier)
-          .init('assets/videos/sparrow.mp4');
+          .init('assets/videos/coding_video.mp4');
     });
   }
 
@@ -818,7 +818,7 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(icon,
-            size: isTablet ? 20 : AppDimensions.d24.h,
+            size: isTablet ? 20 : AppDimensions.d14.h,
             color: AppColors.appBarColor),
         SizedBox(height: 6),
         Text(title).extrabold(
