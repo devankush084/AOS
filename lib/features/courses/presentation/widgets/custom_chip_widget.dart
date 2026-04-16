@@ -21,12 +21,15 @@ class AppChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.shortestSide >= 600;
+
     return GestureDetector(
       onTap: onTap,
       child: Chip(
         label: Text(
           label,
-          style:  TextStyle(fontSize: AppDimensions.d12.sp,fontWeight: FontWeight.w800,color: AppColors.colorA8A6A6),
+          style:  TextStyle(fontSize:isTablet ? 20 : AppDimensions.d12.sp,fontWeight: FontWeight.w800,color: AppColors.colorA8A6A6),
         ),
         backgroundColor: isSelect? AppColors.chipBackground:  AppColors.white,
         shape: RoundedRectangleBorder(

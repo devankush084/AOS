@@ -5,11 +5,16 @@ import 'package:aos/Core/widgets/network_listener.dart';
 import 'package:aos/features/ai/presentation/screens/ai_chat_screen.dart';
 import 'package:aos/features/ai/presentation/screens/ai_tutor.dart';
 import 'package:aos/features/ai/presentation/screens/chat_page.dart';
+import 'package:aos/features/auth/presentation/screens/login_screen.dart';
+import 'package:aos/features/auth/presentation/screens/onboarding_screen.dart';
+import 'package:aos/features/auth/presentation/screens/splash_screen.dart';
+import 'package:aos/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:aos/features/courses/presentation/screens/course_detail_screen.dart';
-import 'package:aos/features/courses/presentation/screens/course_module_screen.dart';
 import 'package:aos/features/courses/presentation/screens/course_overview_screen.dart';
+import 'package:aos/features/courses/presentation/screens/course_video_screen.dart';
 import 'package:aos/features/courses/presentation/screens/my_books_screen.dart';
 import 'package:aos/features/dashboard/presentation/widgets/bottom_navigation_bar.dart' hide FloatingNavBar2;
+import 'package:aos/features/module/presentation/screens/course_module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,11 +41,11 @@ class MyApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
 
-          // home: const FloatingNavBar2(),
-
-          home: MyBooksScreen(),
+          home: CourseOverviewScreen(),
 
 
+
+          //
           // initialRoute: AppNames.splash,
           // onGenerateRoute: AppRouter.generateRoute,
 

@@ -115,8 +115,10 @@ class AppDimensions {
   static const double d132 = 132.0;
   static const double d140 = 140.0;
   static const double d150 = 150.0;
+  static const double d165 = 165.0;
   static const double d170 = 170.0;
   static const double d200 = 200.0;
+  static const double d235 = 235.0;
   static const double d240 = 240.0;
   static const double d280 = 280.0;
   static const double d300 = 300.0;

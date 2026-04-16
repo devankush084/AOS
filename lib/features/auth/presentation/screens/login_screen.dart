@@ -2,6 +2,7 @@ import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -50,15 +51,18 @@ class LoginScreen extends ConsumerWidget {
                   "Sign in to your\nAccount",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: isTablet ? 21 : 26,
+                    fontSize: isTablet ? 21 : 21.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: isTablet ? 0 : 10),
+                SizedBox(height: isTablet ? 20   : 10),
                 Expanded(
                   child: isTablet
-                      ? _buildTabletLayout(context, ref, state)
+                      ? Align(
+                      alignment: Alignment.bottomCenter,
+
+                      child: _buildTabletLayout(context, ref, state))
                       : _buildMobileLayout(context, ref, state),
                 ),
               ],
@@ -90,7 +94,7 @@ class LoginScreen extends ConsumerWidget {
       child: Center(
         child: SizedBox(
           width: 500,
-          child: _formContent(context, ref, state, true), // ✅ FIX
+          child: _formContent(context, ref, state, true),
         ),
       ),
     );

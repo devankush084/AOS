@@ -1,7 +1,9 @@
+import 'package:aos/Core/constants/app_dimensions.dart';
 import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../Core/constants/app_images.dart';
 import '../providers/onboarding_provider.dart';
 
@@ -55,7 +57,7 @@ class OnboardingScreen extends ConsumerWidget {
             ),
           ),
 
-          /// ⭐ STARS
+
           const Positioned(
               top: 80,
               left: 40,
@@ -83,7 +85,7 @@ class OnboardingScreen extends ConsumerWidget {
                 return Column(
                   children: [
 
-                    SizedBox(height: isTablet ? 60 : 120),
+                  isTablet ? SizedBox(height: 20,):SizedBox(height: 80.h,),
 
 
                     SizedBox(
@@ -120,8 +122,10 @@ class OnboardingScreen extends ConsumerWidget {
                         );
                       }),
                     ),
+                    isTablet ? Spacer() : SizedBox(height: AppDimensions.d57.h,),
 
-                    SizedBox(height: isTablet ? 30 : 20),
+
+
 
                     /// 🔥 CARD
                     Expanded(
@@ -133,7 +137,7 @@ class OnboardingScreen extends ConsumerWidget {
                           ),
                           padding: EdgeInsets.symmetric(
                             horizontal: isTablet ? 32 : 24,
-                            vertical: isTablet ? 30 : 24,
+                            vertical: isTablet ? 10 : 24,
                           ),
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -162,7 +166,7 @@ class OnboardingScreen extends ConsumerWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize:
-                                  isTablet ? 28 : 24,
+                                  isTablet ? 20 : 22.sp,
                                   fontWeight:
                                   FontWeight.bold,
                                   color: isTablet
@@ -181,14 +185,14 @@ class OnboardingScreen extends ConsumerWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize:
-                                  isTablet ? 16 : 14,
+                                  isTablet ? 14 : 17.sp,
                                   color: Colors.black54,
                                 ),
                               ),
 
                               SizedBox(
                                   height:
-                                  isTablet ? 30 : 24),
+                                  isTablet ? 10  : 24),
 
                               /// 🔥 BUTTON
                               GestureDetector(
@@ -240,8 +244,8 @@ class OnboardingScreen extends ConsumerWidget {
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: isTablet
-                                            ? 18
-                                            : 16,
+                                            ? 14
+                                            : 21.sp,
                                         fontWeight:
                                         FontWeight.w600,
                                       ),

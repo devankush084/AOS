@@ -1,3 +1,4 @@
+import 'package:aos/Core/utils/app_extension.dart';
 import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
 import 'package:flutter/material.dart';
@@ -48,46 +49,49 @@ class WelcomeScreen extends ConsumerWidget {
                         : size.height * 0.68,
                   ),
 
-                  Spacer(flex: isTablet ? 3 : 9),
+                  Spacer(flex: isTablet ? 10 : 9),
 
                   /// 🔥 BUTTON
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isTablet ? 0 : 24,
-                    ),
-                    child: GestureDetector(
-                      onTap: () { Navigator.pushNamed(context, AppNames.login); },
-                      child: Container(
-                        height: isTablet ? 70 : 55,
-                        width: isTablet ? size.width * 0.4 : double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFFFFFFF), Color(0xFFEAEAFF)],
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 12,
-                              offset: const Offset(0, 6),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isTablet ? 0 : 24,
+                      ),
+                      child: GestureDetector(
+                        onTap: () { Navigator.pushNamed(context, AppNames.login); },
+                        child: Container(
+                          height: isTablet ? 60 : 55,
+                          width: isTablet ? size.width * 0.4 : double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFFFFFFFF), Color(0xFFEAEAFF)],
                             ),
-                          ],
-                        ),
-                        child:  Center(
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              color: Color(0xFF5F2EEA),
-                              fontSize: isTablet ? 22 : 16,
-                              fontWeight: FontWeight.bold,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                blurRadius: 12,
+                                offset: const Offset(0, 6),
+                              ),
+                            ],
+                          ),
+                          child:  Center(
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Color(0xFF5F2EEA),
+                                fontSize: isTablet ? 20 : 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ).paddingOnly(bottom: 10),
 
-                  const Spacer(flex: 1),
+
                 ],
               )
             ),

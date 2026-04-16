@@ -21,4 +21,6 @@ class AppImages {
   static const courseImage = 'assets/images/courses_detail.png';
   static const courseOverView = 'assets/images/course_overView.png';
   static const courseTeacher = 'assets/images/course_teacher.png';
+  static const subjectBook = 'assets/images/subject_book.png';
+  static const thumbnail = 'assets/images/thumbnail.png';
 }
