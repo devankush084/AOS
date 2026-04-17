@@ -3,11 +3,12 @@ import 'package:aos/Core/utils/app_extension.dart';
 import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
 import 'package:aos/config/theme/color_scheme.dart';
-import 'package:aos/core/constants/app_images.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../Core/constants/app_images.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends ConsumerWidget {

@@ -1,13 +1,15 @@
 import 'package:aos/Core/constants/app_dimensions.dart';
 import 'package:aos/Core/utils/app_extension.dart';
 import 'package:aos/config/theme/color_scheme.dart';
-import 'package:aos/core/constants/app_images.dart';
+
 import 'package:aos/features/courses/presentation/providers/course_video_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../../Core/constants/app_images.dart';
 
 class CourseVideoScreen extends ConsumerStatefulWidget {
   const CourseVideoScreen({super.key});

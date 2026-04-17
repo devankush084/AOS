@@ -46,17 +46,17 @@ class _CourseItem extends StatelessWidget {
         constraints: const BoxConstraints(minHeight: 150),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Color(0xFFA8A6A6)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 5),
-            ),
-          ]
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Color(0xFFA8A6A6)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 5),
+              ),
+            ]
 
         ),
         child: Column(
@@ -102,12 +102,12 @@ class _CourseItem extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Progress"),
-            
+
                 const SizedBox(width: 29),
                 Text("50%")
               ],
             ),
-        const SizedBox(height:10),
+            const SizedBox(height:10),
             LinearProgressIndicator(
               value: 0.8,
               borderRadius: BorderRadius.circular(10),

@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'features/auth/presentation/screens/otp_verification_screen.dart';
 import 'features/dashboard/presentation/widgets/bottom_navigation_bar.dart'; // ✅ ADD THIS
 
 void main() {
@@ -35,6 +36,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final navigatorKey = ref.watch(routerProvider);
+
 
     return ScreenUtilInit(
       designSize: const Size(393, 856),

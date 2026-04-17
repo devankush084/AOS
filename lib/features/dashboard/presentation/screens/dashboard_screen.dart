@@ -6,7 +6,6 @@ import 'package:aos/features/dashboard/presentation/widgets/quick_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({super.key});
 
@@ -17,12 +16,14 @@ class StudentDashboard extends StatefulWidget {
 class _StudentDashboardState extends State<StudentDashboard> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width > 600;
+
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-
           colors: [
             Color(0xFF7A63F9),
             Color(0xFFD2CAFD),
@@ -35,138 +36,145 @@ class _StudentDashboardState extends State<StudentDashboard> {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      child: FaIcon(FontAwesomeIcons.user),
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Good Morning John",
-                        ).bold(color: Colors.white, size: 18),
-                        Text(
-                          "Continue your learning journey",
-                        ).regular(color: Colors.white, size: 16),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Text("AI Assistant").bold(size: 16, color: Colors.white),
-                SizedBox(height: 10),
-
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      height: 150,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.04,
+                vertical: size.height * 0.02,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// 🔥 HEADER
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius:
+                            isTablet ? size.width * 0.05 : size.width * 0.08,
+                        child: const FaIcon(FontAwesomeIcons.user),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            "Ask Yana AI",
-                          ).bold(color: Color(0xFF4E4E4E), size: 18),
-                          Text(
-                            "Get help with lession explanations,\nstudy & guidance",
-                          ).regular(color: Color(0xFF4E4E4E),size: 16),
-                          TextButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                Color(0xFF5A41F5),
-                              ),
-                            ),
-                            child: Text(
-                              "Ask Ai",
-                            ).semiBold(color: Colors.white, size: 14),
-                          ),
-                        ],
-                      ).paddingAll(8),
-                    ),
-                    Positioned(
-                      right: -30,
-                      top: -50,
-
-                      child: ClipRRect(
-                        child: Image.asset(
-
-
-                          "assets/images/ai_photo1.png",
-
-                          height: 250,
-                          width: 250,
+                      SizedBox(width: size.width * 0.04),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Good Morning John").bold(
+                                color: Colors.white, size: isTablet ? 20 : 16),
+                            Text("Continue your learning journey").regular(
+                                color: Colors.white, size: isTablet ? 18 : 14),
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-
-                Text(
-                  "Continue Learning",
-                ).bold(color: Color(0xFF4E4E4E), size: 16),
-                Text(
-                  "Last Course the student opened",
-                ).bold(color: Color(0xFF4E4E4E), size: 14),
-                SizedBox(height: 10),
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        spreadRadius: 4,
-                        blurRadius: 4,
-
-                        offset: Offset(1, 4),
                       ),
                     ],
                   ),
-                  child: Row(
+
+                  SizedBox(height: size.height * 0.02),
+
+                  /// 🔥 AI ASSISTANT
+                  Text("AI Assistant")
+                      .bold(size: isTablet ? 20 : 16, color: Colors.white),
+
+                  SizedBox(height: size.height * 0.02),
+
+                  Stack(
+                    clipBehavior: Clip.none,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-
-                          "assets/images/Course1.png",
-
-
-
-                          width: 100,
-                          height: 80,
-                          fit: BoxFit.cover,
+                      Container(
+                        constraints: BoxConstraints(
+                          minHeight: size.height * 0.18,
                         ),
-                      ).paddingAll(10),
+                        width: double.infinity,
+                        padding: EdgeInsets.all(size.width * 0.04),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Ask Yana AI").bold(
+                                color: Color(0xFF4E4E4E),
+                                size: isTablet ? 20 : 16),
+                            SizedBox(height: 6),
+                            Text(
+                              "Get help with lesson explanations,\nstudy & guidance",
+                            ).regular(
+                              color: Color(0xFF4E4E4E),
+                              size: isTablet ? 16 : 14,
+                            ),
+                            SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {},
+                              style: const ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll(
+                                  Color(0xFF5A41F5),
+                                ),
+                              ),
+                              child: const Text("Ask Ai")
+                                  .bold(color: Colors.white, size: 14),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        top: -size.height * 0.03,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.4,
+                          child: Image.asset(
+                            "assets/images/ai_tutor.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
+                  SizedBox(height: size.height * 0.02),
+
+                  Text("Continue Learning")
+                      .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
+
+                  Text("Last Course the student opened")
+                      .regular(color: Color(0xFF4E4E4E), size: 14),
+
+                  SizedBox(height: size.height * 0.02),
+
+                  Container(
+                    padding: EdgeInsets.all(size.width * 0.03),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.15),
+                          blurRadius: 6,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.asset(
+                            "assets/images/Course1.png",
+                            width: isTablet
+                                ? size.width * 0.15
+                                : size.width * 0.25,
+                            height: isTablet
+                                ? size.height * 0.12
+                                : size.height * 0.10,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(width: size.width * 0.03),
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "Course Title Learning",
-                              ).bold(color: Color(0xFF4E4E4E), size: 14),
-
-                              SizedBox(height: 8),
-
+                              Text("Course Title Learning")
+                                  .bold(color: Color(0xFF4E4E4E), size: 14),
+                              SizedBox(height: size.height * 0.01),
                               LinearProgressIndicator(
                                 value: 0.8,
                                 borderRadius: BorderRadius.circular(10),
@@ -174,51 +182,67 @@ class _StudentDashboardState extends State<StudentDashboard> {
                                 color: Color(0xFF6500E2),
                                 minHeight: 6,
                               ),
-
-                              SizedBox(height: 8),
-
+                              SizedBox(height: size.height * 0.01),
                               TextButton(
                                 onPressed: () {},
-                                style: ButtonStyle(
+                                style: const ButtonStyle(
                                   backgroundColor: WidgetStatePropertyAll(
                                     Color(0xFF5A41F5),
                                   ),
                                 ),
-                                child: Text(
-                                  "Resume Learning",
-                                ).bold(color: Colors.white, size: 14),
+                                child: const Text("Resume Learning")
+                                    .bold(color: Colors.white, size: 14),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Text("My Courses").bold(color: Color(0xFF4E4E4E), size: 16),
-                SizedBox(height: 250, child: MyCoursesSection()),
 
-                Text(
-                  "Learning Process",
-                ).bold(color: Color(0xFF4E4E4E), size: 16),
-                SizedBox(height: 10),
-                LearningProgress(),
-                SizedBox(height: 10),
-                Text("Quick Actions").bold(color: Color(0xFF4E4E4E), size: 16),
-                SizedBox(height: 10),
-                QuickActions(),
-                SizedBox(height: 10),
-                Text(
-                  "Notification Preview",
-                ).bold(color: Color(0xFF4E4E4E), size: 16),
-                SizedBox(height: 10),
+                  SizedBox(height: size.height * 0.02),
 
+                  /// 🔥 MY COURSES
+                  Text("My Courses")
+                      .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
 
-                NotificationWidget(),
-                SizedBox(height: 100,)
-              ],
-            ).paddingSymmetric(vertical: 10, horizontal: 10),
+                  SizedBox(
+                    height: size.height * 0.28,
+                    child: MyCoursesSection(),
+                  ),
+
+                  SizedBox(height: size.height * 0.02),
+
+                  /// 🔥 LEARNING PROCESS
+                  Text("Learning Process")
+                      .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
+
+                  SizedBox(height: size.height * 0.01),
+                  LearningProgress(),
+
+                  SizedBox(height: size.height * 0.02),
+
+                  /// 🔥 QUICK ACTIONS
+                  Text("Quick Actions")
+                      .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
+
+                  SizedBox(height: size.height * 0.01),
+                  QuickActions(),
+
+                  SizedBox(height: size.height * 0.02),
+
+                  /// 🔥 NOTIFICATION
+                  Text("Notification Preview")
+                      .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
+
+                  SizedBox(height: size.height * 0.01),
+                  NotificationWidget(),
+
+                  /// 🔥 NAV SAFE SPACE
+                  SizedBox(height: size.height * 0.12),
+                ],
+              ),
+            ),
           ),
         ),
       ),
