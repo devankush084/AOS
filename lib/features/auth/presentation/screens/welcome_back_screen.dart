@@ -1,6 +1,7 @@
 import 'package:aos/Core/constants/app_dimensions.dart';
 import 'package:aos/Core/constants/app_images.dart';
 import 'package:aos/Core/utils/app_extension.dart';
+import 'package:aos/config/routes/route_names.dart';
 import 'package:aos/config/theme/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,15 +21,10 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
     final size = MediaQuery.of(context).size;
     final isTablet = size.shortestSide >= 600;
     return Scaffold(
-        body: Stack(
+        body: Stack(clipBehavior: Clip.none,
+          alignment: Alignment.center,
       children: [
-        Positioned(
-          bottom: 0,
-          left: 0,
-          child: Image.asset(
-            AppImages.bottomImage,
-          ),
-        ),
+
         Column(
           children: [
             Expanded(
@@ -47,6 +43,34 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
             ),
           ],
         ),
+        Positioned(
+          top: 400.h,// adjust according to UI
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              height: 70.h,
+              width: 70.w,
+              decoration: BoxDecoration(
+                color: AppColors.scaffoldGradientStart,
+                borderRadius: BorderRadius.circular(20.r),
+
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.scaffoldGradientStart.withOpacity(0.4),
+                    blurRadius: 20,
+                    spreadRadius: 4,
+                  )
+                ],
+              ),
+              child: Icon(
+                Icons.fingerprint,
+                color: Colors.white,
+                size: 35.sp,
+              ),
+            ),
+          ),
+        ),
         Center(
           child: Container(
             padding: EdgeInsets.all(16),
@@ -64,6 +88,9 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                SizedBox(
+                  height: AppDimensions.d30.h,
+                ),
                 Center(
                     child: const Text("Welcome Back").extrabold(
                         color: Colors.black, size: AppDimensions.d22.sp,letterSpacing: 1)),
@@ -80,7 +107,7 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
                     color:AppColors.fontColor,
                   ),
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.pin,color: AppColors.colorF6500E2,),
+                      prefixIcon: const Icon(Icons.password,color: AppColors.colorF6500E2,),
                       filled: true,
                       fillColor: AppColors.white,
                       hintText: "Enter your Pin",
@@ -91,11 +118,11 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppDimensions.d10.r),
-                          borderSide: BorderSide(color: AppColors.colorDAD6D6,width: 2)
+                          borderSide: const BorderSide(color: AppColors.colorDAD6D6,width: 2)
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppDimensions.d10.r),
-                          borderSide: BorderSide(color: AppColors.colorDAD6D6,width: 2)
+                          borderSide: const BorderSide(color: AppColors.colorDAD6D6,width: 2)
                       )
                   ),
                 ),
@@ -103,13 +130,79 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text("Forgot Pin?").bold(
-                        color: AppColors.fontColor, size: AppDimensions.d15.sp,letterSpacing: 1),
+                    GestureDetector(
+                      onTap: (){
+                        
+                        Navigator.pushNamed(context, AppNames.resetPassword);
+                      }
+                      
+                      ,child: const Text("Forgot Pin?").bold(
+                          color: AppColors.fontColor, size: AppDimensions.d15.sp,letterSpacing: 1),
+                    ),
                   ],
-                )
+                ),
+                SizedBox(
+                  height: AppDimensions.d30.h,
+                ),
               ],
             ),
           ).paddingHorizontal(AppDimensions.d20.w),
+        ),
+        Positioned(
+          bottom: 520.h,// adjust according to UI
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              height: 70.h,
+              width: 70.w,
+              decoration: BoxDecoration(
+                color: AppColors.scaffoldGradientStart,
+
+                shape: BoxShape.circle,
+
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.scaffoldGradientStart.withOpacity(0.4),
+                    blurRadius: 20,
+                    spreadRadius: 4,
+                  )
+                ],
+              ),
+              child: CircleAvatar(
+                child: Image.asset(AppImages.courseTeacher),
+                
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 280.h, // adjust according to UI
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              height: 70.h,
+              width: 70.w,
+              decoration: BoxDecoration(
+                color: AppColors.scaffoldGradientStart,
+                borderRadius: BorderRadius.circular(20.r),
+
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.scaffoldGradientStart.withOpacity(0.4),
+                    blurRadius: 20,
+                    spreadRadius: 4,
+                  )
+                ],
+              ),
+              child: Icon(
+                Icons.fingerprint,
+                color: Colors.white,
+                size: 35.sp,
+              ),
+            ),
+          ),
         ),
       ],
     ));

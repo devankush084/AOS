@@ -1,5 +1,6 @@
 import 'package:aos/config/routes/route_names.dart';
 import 'package:aos/features/auth/presentation/screens/reset_success_screen.dart';
+import 'package:aos/features/auth/presentation/screens/welcome_back_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -36,6 +37,9 @@ class AppRouter {
 
       case AppNames.resetPassword:
         return _materialRoute(ResetPasswordScreen());
+
+      case AppNames.welcomeBack:
+        return _materialRoute(const WelcomeBackScreen());
 
       case AppNames.welcome:
         return _materialRoute(const WelcomeScreen());

@@ -8,6 +8,8 @@ import 'package:aos/features/ai/presentation/screens/chat_page.dart';
 import 'package:aos/features/auth/presentation/screens/create_pin_screen.dart';
 import 'package:aos/features/auth/presentation/screens/login_screen.dart';
 import 'package:aos/features/auth/presentation/screens/onboarding_screen.dart';
+import 'package:aos/features/auth/presentation/screens/otp_verification_screen.dart';
+import 'package:aos/features/auth/presentation/screens/reset_password_screen.dart';
 import 'package:aos/features/auth/presentation/screens/splash_screen.dart';
 import 'package:aos/features/auth/presentation/screens/welcome_back_screen.dart';
 import 'package:aos/features/auth/presentation/screens/welcome_screen.dart';
@@ -43,12 +45,12 @@ class MyApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
 
-          home:WelcomeBackScreen(),
+          home:OTPVerificationScreen(),
 
 
 
-          //
-          // initialRoute: AppNames.splash,
+
+          // initialRoute: AppNames.login,
           // onGenerateRoute: AppRouter.generateRoute,
 
           builder: (context, child) {
