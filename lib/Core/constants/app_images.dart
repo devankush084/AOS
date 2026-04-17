@@ -23,4 +23,8 @@ class AppImages {
   static const courseTeacher = 'assets/images/course_teacher.png';
   static const subjectBook = 'assets/images/subject_book.png';
   static const thumbnail = 'assets/images/thumbnail.png';
+  static const bookThumbnail = 'assets/images/book_thumbnail.png';
+  static const loginPositionImage = 'assets/images/login_position_image.jpg';
+  static const bottomImage = 'assets/images/bottom_image.png';
+  static const loginImage = 'assets/images/login_image.png';
 }

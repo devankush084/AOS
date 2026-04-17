@@ -8,4 +8,5 @@ class AppNames{
   static const String welcome = '/welcome';
   static const String resetPassword = "/reset-password";
   static const String ResetSuccessScreen = "/ResetSuccessScreen";
+  static const String createPinScreen = "/CreatePinScreen";
 }

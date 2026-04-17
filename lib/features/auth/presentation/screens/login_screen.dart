@@ -1,8 +1,14 @@
+
+import 'package:aos/Core/constants/app_dimensions.dart';
+import 'package:aos/Core/utils/app_extension.dart';
 import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
+import 'package:aos/config/theme/color_scheme.dart';
+import 'package:aos/core/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -13,239 +19,347 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
     final isTablet = size.shortestSide >= 600;
 
-    final state = ref.watch(authProvider);
 
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF6C63FF), Color(0xFF7F7AFB)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: Image.asset(
+             AppImages.bottomImage,
+
             ),
           ),
-
-          SafeArea(
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ),
-                Image.asset(
-                  "assets/images/login_logo.png",
-                  height: isTablet ? 270 : 250,
-                ),
-
-                SizedBox(height: isTablet ? 0 : 10),
-                 Text(
-                  "Sign in to your\nAccount",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: isTablet ? 21 : 21.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: isTablet ? 20   : 10),
-                Expanded(
-                  child: isTablet
-                      ? Align(
-                      alignment: Alignment.bottomCenter,
-
-                      child: _buildTabletLayout(context, ref, state))
-                      : _buildMobileLayout(context, ref, state),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-  Widget _buildMobileLayout(
-      BuildContext context, WidgetRef ref, dynamic state) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-      decoration: const BoxDecoration(
-        color: Color(0xFFF4F4F4),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
-      child: _formContent(context, ref, state, false), // ✅ FIX
-    );
-  }
-  Widget _buildTabletLayout(
-      BuildContext context, WidgetRef ref, dynamic state) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 120),
-      child: Center(
-        child: SizedBox(
-          width: 500,
-          child: _formContent(context, ref, state, true),
-        ),
-      ),
-    );
-  }
-  Widget _formContent(
-    BuildContext context,
-    WidgetRef ref,
-    dynamic state,
-    bool isTablet,
-  ) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _inputField(
-          hint: "Life ID",
-          icon: Icons.person,
-          controller: email,
-          error: state.emailError,
-          ref: ref,
-        ),
-
-        const SizedBox(height: 15),
-
-        _inputField(
-          hint: "Password",
-          icon: Icons.key,
-          controller: password,
-          error: state.passwordError,
-          isPassword: true,
-          ref: ref,
-        ),
-
-        const SizedBox(height: 10),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Checkbox(value: false, onChanged: (_) {}),
-                Text(
-                  "Remember me",
-                  style: TextStyle(
-                    color: isTablet
-                        ? const Color(0xFFFFFFFF)
-                        : const Color(0xFF000000),
-                  ),
-                ),
-              ],
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppNames.forgotPassword,
-                );
-              },
-              child: Text(
-                "Forgot Password",
-                style: TextStyle(
-                  color: isTablet
-                      ? const Color(0xFFFFFFFF)
-                      : const Color(0xFF6C63FF),
-                  fontWeight: FontWeight.bold,
+          Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: double.infinity,
+                  color: AppColors.scaffoldGradientStart,
                 ),
               ),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: 15),
-        Container(
-          height: isTablet ? 60 : 55,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFF5F2EEA), Color(0xFF7B61FF)],
-            ),
-            borderRadius: BorderRadius.circular(14),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(14),
-            onTap: () {
-              ref.read(authProvider.notifier).login(
-                    email.text.trim(),
-                    password.text.trim(),
-                  );
-            },
-            child: Center(
-              child: state.isLoading
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : Text(
-                      "Log In",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: isTablet ? 18 : 16,
-                      ),
-                    ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-  Widget _inputField({
-    required String hint,
-    required IconData icon,
-    required TextEditingController controller,
-    required WidgetRef ref,
-    String? error,
-    bool isPassword = false,
-  }) {
-    final state = ref.watch(authProvider);
 
-    return TextField(
-      controller: controller,
-      obscureText: isPassword ? state.obscurePassword : false,
-      onChanged: (_) {
-        ref.read(authProvider.notifier).validate(email.text, password.text);
-      },
-      decoration: InputDecoration(
-        hintText: hint,
-        errorText: error,
-        prefixIcon: Icon(icon),
-        suffixIcon: isPassword
-            ? IconButton(
-                icon: Icon(
-                  state.obscurePassword
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                ),
-                onPressed: () {
-                  ref.read(authProvider.notifier).togglePassword();
-                },
-              )
-            : null,
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-      ),
+
+
+          Center(
+            child: Container(
+
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  )
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text("Yana AI").extrabold(color: Colors.black,size: AppDimensions.d32,letterSpacing: 3),
+                  SizedBox(height: 5.h),
+                  const Text("Africa Online School").medium(color: Colors.black,size: AppDimensions.d22),
+                  SizedBox(height: 20.h),
+              TextField(
+                            style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color:AppColors.fontColor,
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person,color: AppColors.colorF6500E2,),
+
+                                filled: true,
+                                fillColor: AppColors.white,
+                                hintText: "Enter your LifeID",
+                                hintStyle: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                  color: AppColors.fontColor.withOpacity(0.4),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+                                    borderSide: BorderSide(color: AppColors.colorDAD6D6,width: 2)
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+                                    borderSide: BorderSide(color: AppColors.colorDAD6D6,width: 2)
+                                )
+                            ),
+                          ),
+                  SizedBox(height: 10),
+               Image.asset(AppImages.loginImage),
+              Container(
+                height: 50.h,
+
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+
+                                gradient:
+                                const LinearGradient(
+                                  colors: [
+                                    Color(0xFF5F2EEA),
+                                    Color(0xFF7B61FF),
+                                  ],
+                                ),
+                              ),
+                              child: TextButton(onPressed: (){},
+                                  style: ButtonStyle(
+                                      shape: WidgetStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(AppDimensions.d10.r)
+                                          )
+                                      )
+                                  ),
+
+
+
+
+
+                                  child: Text("Continue").medium(color: AppColors.white,size: AppDimensions.d17.sp,letterSpacing: 2)))
+                ],
+              ),
+            ).paddingHorizontal(AppDimensions.d20.w),
+          ),
+        ],
+      )
     );
   }
 }
+
+
+
+
+
+
+// import 'package:aos/Core/constants/app_dimensions.dart';
+// import 'package:aos/Core/utils/app_extension.dart';
+// import 'package:aos/config/theme/color_scheme.dart';
+// import 'package:aos/core/constants/app_images.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:google_fonts/google_fonts.dart';
+//
+// class LoginScreen extends ConsumerStatefulWidget {
+//   const LoginScreen({super.key});
+//
+//   @override
+//   ConsumerState<LoginScreen> createState() => _LoginScreenState();
+// }
+//
+// class _LoginScreenState extends ConsumerState<LoginScreen> {
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     final size = MediaQuery.of(context).size;
+//     final isTablet = size.shortestSide >= 600;
+//
+//
+//     return Scaffold(
+//       backgroundColor: AppColors.scaffoldGradientStart,
+//       body: SafeArea(
+//           child:
+//
+//
+//           isTablet ?
+//           SizedBox(
+//             child: Stack(
+//               children: [Column(mainAxisAlignment: MainAxisAlignment.center,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//
+//
+//
+//                   Center(
+//                     child: Container(
+//
+//                       padding: EdgeInsets.all(AppDimensions.d10.w),
+//                       width: 600,
+//
+//                       decoration: BoxDecoration(
+//
+//                           color:AppColors.backgroundColor,
+//                           borderRadius: BorderRadius.circular(AppDimensions.d20.r)
+//                       ),
+//                       child: Column(
+//                         children: [
+//                           const Text("Yana AI").extrabold(color: Colors.black,size: AppDimensions.d32),
+//                           const Text("Africa Online School").medium(color: Colors.black,size: AppDimensions.d22),
+//
+//                           SizedBox(height: 20.h,),
+//                           TextField(
+//                             style: GoogleFonts.roboto(
+//                               fontSize: 16,
+//                               fontWeight: FontWeight.w500,
+//                               color: Colors.black,
+//                             ),
+//                             decoration: InputDecoration(
+//
+//                                 filled: true,
+//                                 fillColor: AppColors.white,
+//                                 hintText: "Enter your LifeID",
+//                                 hintStyle: GoogleFonts.roboto(
+//                                   fontSize: 16,
+//                                   fontWeight: FontWeight.w900,
+//                                   color: Colors.black,
+//                                 ),
+//                                 focusedBorder: OutlineInputBorder(
+//                                     borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+//                                     borderSide: BorderSide(color: Colors.white)
+//                                 ),
+//                                 enabledBorder: OutlineInputBorder(
+//                                     borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+//                                     borderSide: BorderSide(color: Colors.white)
+//                                 )
+//                             ),
+//                           ),
+//
+//                           SizedBox(height: 100.h,),
+//                           Container(
+//                             height: 60.h,
+//
+//                               width: double.infinity,
+//                               decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+//
+//                                 gradient:
+//                                 const LinearGradient(
+//                                   colors: [
+//                                     Color(0xFF5F2EEA),
+//                                     Color(0xFF7B61FF),
+//                                   ],
+//                                 ),
+//                               ),
+//                               child: TextButton(onPressed: (){},
+//                                   style: ButtonStyle(
+//                                       shape: WidgetStatePropertyAll(
+//                                           RoundedRectangleBorder(
+//                                               borderRadius: BorderRadius.circular(AppDimensions.d10.r)
+//                                           )
+//                                       )
+//                                   ),
+//
+//
+//
+//
+//
+//                                   child: Text("Continue").medium(color: AppColors.white,size: AppDimensions.d24)))
+//                         ],
+//                       ),
+//
+//                     ),
+//                   )
+//                 ],
+//               )],
+//             ),
+//           ).paddingHorizontal(AppDimensions.d20.w) :
+//
+//
+//           SizedBox(
+//         child: Column(mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//
+//             Container(
+//             padding: EdgeInsets.all(AppDimensions.d10.w),
+//               width: double.infinity,
+//               decoration: BoxDecoration(
+//
+//                 color:AppColors.backgroundColor,
+//                 borderRadius: BorderRadius.circular(AppDimensions.d20.r)
+//               ),
+//               child: Column(
+//                 children: [
+//                   const Text("Yana AI").extrabold(color: Colors.black,size: AppDimensions.d32.sp),
+//                   const Text("Africa Online School").medium(color: Colors.black,size: AppDimensions.d22.sp),
+//
+//                   SizedBox(height: 20.h,),
+//                   TextField(
+//                     style: GoogleFonts.roboto(
+//                       fontSize: 15.sp,
+//                       fontWeight: FontWeight.w600,
+//                       color: AppColors.fontColor,
+//                     ),
+//                     decoration: InputDecoration(
+//
+//                       filled: true,
+//                       fillColor: AppColors.white,
+//                       hintText: "Enter your LifeID",
+//                       hintStyle: GoogleFonts.roboto(
+//                         fontSize: 15.sp,
+//                         fontWeight: FontWeight.w900,
+//                         color: AppColors.fontColor,
+//                       ),
+//                       focusedBorder: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+//                         borderSide: BorderSide(color: Colors.white)
+//                       ),
+//                       enabledBorder: OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+//                           borderSide: BorderSide(color: Colors.white)
+//                       )
+//                     ),
+//                   ),
+//
+//                   SizedBox(height: 100.h,),
+//                   Container(
+//                     height: 50.h,
+//                       width: double.infinity,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+//
+//                           gradient:
+//                         const LinearGradient(
+//                           colors: [
+//                             Color(0xFF5F2EEA),
+//                             Color(0xFF7B61FF),
+//                           ],
+//                         ),
+//                       ),
+//                       child: TextButton(onPressed: (){},
+//                           style: ButtonStyle(
+//                             shape: WidgetStatePropertyAll(
+//                               RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(AppDimensions.d10.r)
+//                               )
+//                             )
+//                           ),
+//
+//
+//
+//
+//
+//                           child: Text("Continue").medium(color: AppColors.white,size: AppDimensions.d15.sp)))
+//                 ],
+//               ),
+//
+//             )
+//           ],
+//         ),
+//       ).paddingHorizontal(AppDimensions.d20.w)
+//       ),
+//     );
+//   }
+// }

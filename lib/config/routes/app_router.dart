@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/screens/splash_screen.dart';
 import '../../features/auth/presentation/screens/onboarding_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
-import '../../features/auth/presentation/screens/register_screen.dart';
+import '../../features/auth/presentation/screens/create_pin_screen.dart';
 import '../../features/auth/presentation/screens/forgot_password_screen.dart';
 import '../../features/auth/presentation/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/screens/reset_password_screen.dart';
@@ -25,8 +25,8 @@ class AppRouter {
       case AppNames.login:
         return _materialRoute(LoginScreen());
 
-      case AppNames.register:
-        return _materialRoute(RegisterScreen());
+      case AppNames.createPinScreen:
+        return _materialRoute(CreatePinScreen());
 
       case AppNames.forgotPassword:
         return _materialRoute(ForgotPasswordScreen());

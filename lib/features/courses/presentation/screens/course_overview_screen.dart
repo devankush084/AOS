@@ -22,34 +22,14 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
 
 
 
-  @override
-  void initState() {
-    super.initState();
-
-    Future.microtask(() {
-      ref.read(videoProvider.notifier)
-          .init('assets/videos/coding_video.mp4');
-    });
-  }
 
 
-
-  String _formatDuration(Duration d) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final minutes = twoDigits(d.inMinutes.remainder(60));
-    final seconds = twoDigits(d.inSeconds.remainder(60));
-    return "$minutes:$seconds";
-  }
 
   @override
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
     final isTablet = size.shortestSide >= 600;
-
-    final state = ref.watch(videoProvider);
-    final notifier = ref.read(videoProvider.notifier);
-    final controller = notifier.controller;
 
 
     return Container(
@@ -63,6 +43,7 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            toolbarHeight: isTablet ? 80 : 60,
             backgroundColor: AppColors.appBarColor,
             centerTitle: true,
             leading: GestureDetector(
@@ -84,13 +65,11 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 10,),
-                        Container(
-                          height: 300.h,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(AppDimensions.d20.r)
-                          ),
+                        Center(
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+
+                              child: Image.asset(AppImages.bookThumbnail,height: 300.h,)),
                         ),
 
                         SizedBox(height: 10,),
@@ -102,18 +81,28 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
 
 
                             _teacherInfo(isTablet),
-
-
-                            Wrap(
-                              spacing: 5.w,        // horizontal gap
-                              runSpacing: 2.h,      // vertical gap (when it goes to next line)
+                            Column(
                               children: [
-                                _infoItem(Icons.star, "4.8", true),
-                                _infoItem(Icons.group, "1200", true),
-                                _infoItem(Icons.history_toggle_off_sharp, "10 hours", true),
-                                _infoItem(Icons.my_library_books_rounded, "12 Lessons", true),
+                                SizedBox(
+
+                                  width: 300,
+                                  child: Wrap(
+                                    spacing:  5.w,
+                                    runSpacing: 10.h,
+                                    children: [
+                                      _infoItem(Icons.star, "4.8", true),
+                                      _infoItem(Icons.group, "1200", true),
+                                      _infoItem(Icons.history_toggle_off_sharp, "10 hours", true),
+                                      _infoItem(Icons.my_library_books_rounded, "12 Lessons", true),
+                                    ],
+                                  ),
+                                )
                               ],
+
                             ),
+
+
+
 
 
                           ],
@@ -299,7 +288,7 @@ class _CourseOverviewScreenState extends ConsumerState<CourseOverviewScreen> {
           Icon(icon,
               size: isTablet ? 20 : AppDimensions.d20.h,
               color: AppColors.appBarColor),
-          SizedBox(width: 10.w,),
+          SizedBox(width: 5.w,),
 
           Text(title).extrabold(
             color: Colors.black,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// =======================
 /// TEXT EXTENSION
@@ -14,23 +15,25 @@ extension TextStyleExtension on Text {
     double? height,
     TextDecoration? decoration,
     FontStyle? fontStyle,
-    String? fontFamily,
     double? letterSpacing,
   }) {
+    final baseStyle = GoogleFonts.fjallaOne(
+      textStyle: style, // preserves existing style if any
+    );
+
     return Text(
       data ?? '',
       key: key,
       textAlign: textAlign ?? this.textAlign,
       maxLines: maxLines ?? this.maxLines,
       overflow: overflow ?? this.overflow,
-      style: (style ?? const TextStyle()).copyWith(
+      style: baseStyle.copyWith(
         fontSize: size,
         color: color,
         fontWeight: weight,
         height: height,
         decoration: decoration,
         fontStyle: fontStyle,
-        fontFamily: fontFamily,
         letterSpacing: letterSpacing,
       ),
     );

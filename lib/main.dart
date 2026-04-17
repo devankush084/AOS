@@ -5,9 +5,11 @@ import 'package:aos/Core/widgets/network_listener.dart';
 import 'package:aos/features/ai/presentation/screens/ai_chat_screen.dart';
 import 'package:aos/features/ai/presentation/screens/ai_tutor.dart';
 import 'package:aos/features/ai/presentation/screens/chat_page.dart';
+import 'package:aos/features/auth/presentation/screens/create_pin_screen.dart';
 import 'package:aos/features/auth/presentation/screens/login_screen.dart';
 import 'package:aos/features/auth/presentation/screens/onboarding_screen.dart';
 import 'package:aos/features/auth/presentation/screens/splash_screen.dart';
+import 'package:aos/features/auth/presentation/screens/welcome_back_screen.dart';
 import 'package:aos/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:aos/features/courses/presentation/screens/course_detail_screen.dart';
 import 'package:aos/features/courses/presentation/screens/course_overview_screen.dart';
@@ -41,7 +43,7 @@ class MyApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
 
-          home: CourseOverviewScreen(),
+          home:WelcomeBackScreen(),
 
 
 

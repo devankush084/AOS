@@ -51,6 +51,7 @@ dependencies:
 
   flutter_rating_stars:
   video_player:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:
