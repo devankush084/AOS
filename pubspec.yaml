@@ -47,7 +47,7 @@ dependencies:
   chip_list: ^3.1.0
 
   fluttertoast: ^8.2.14
-  flutter_otp_text_field:
+  pin_code_fields:
   pinput:
 
 

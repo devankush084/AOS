@@ -5,7 +5,6 @@ import 'package:aos/config/routes/app_router.dart';
 import 'package:aos/config/routes/route_names.dart';
 import 'package:aos/config/theme/color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
@@ -75,19 +74,26 @@ class OTPVerificationScreen extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(AppImages.loginImage),
+                  Image.asset(AppImages.otpLogo,height: 224.h,),
                   SizedBox(height: 10.h),
                   const Text("Verify your identity").extrabold(
                       color: Colors.black,
                       size: AppDimensions.d32,
                       letterSpacing: 3),
                   SizedBox(height: 10.h),
-                  Pinput(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Pinput(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     length: 6,
-
-
+                    defaultPinTheme: PinTheme(
+                      width: 43.w,
+                      height: 41.h,
+                      textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                   ),
+
                   SizedBox(height: 10.h),
                   
                   Row(mainAxisAlignment: MainAxisAlignment.end,

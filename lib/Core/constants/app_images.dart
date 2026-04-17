@@ -28,4 +28,5 @@ class AppImages {
   static const bottomImage = 'assets/images/bottom_image.png';
   static const loginImage = 'assets/images/login_image.png';
   static const resetPassword = 'assets/images/reset_password.png';
+  static const otpLogo = 'assets/images/Otp_logo.png';
 }

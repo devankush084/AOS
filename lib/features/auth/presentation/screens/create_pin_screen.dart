@@ -90,7 +90,7 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
 
                           filled: true,
                           fillColor: AppColors.white,
-                          hintText: "Enter your LifeID",
+                          hintText: "Enter 4-digit Pin",
                           hintStyle: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
@@ -120,7 +120,7 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
 
                           filled: true,
                           fillColor: AppColors.white,
-                          hintText: "Enter your LifeID",
+                          hintText: "Confirm Your Pin",
                           hintStyle: GoogleFonts.roboto(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,

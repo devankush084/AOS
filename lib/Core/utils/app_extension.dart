@@ -16,6 +16,7 @@ extension TextStyleExtension on Text {
     TextDecoration? decoration,
     FontStyle? fontStyle,
     double? letterSpacing,
+
   }) {
     final baseStyle = GoogleFonts.fjallaOne(
       textStyle: style, // preserves existing style if any

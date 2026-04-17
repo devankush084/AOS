@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 
 class WelcomeBackScreen extends ConsumerStatefulWidget {
   const WelcomeBackScreen({super.key});
@@ -43,167 +44,138 @@ class _WelcomeBackScreenState extends ConsumerState<WelcomeBackScreen> {
             ),
           ],
         ),
-        Positioned(
-          top: 400.h,// adjust according to UI
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Container(
-              height: 70.h,
-              width: 70.w,
-              decoration: BoxDecoration(
-                color: AppColors.scaffoldGradientStart,
-                borderRadius: BorderRadius.circular(20.r),
 
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.scaffoldGradientStart.withOpacity(0.4),
-                    blurRadius: 20,
-                    spreadRadius: 4,
-                  )
-                ],
-              ),
-              child: Icon(
-                Icons.fingerprint,
-                color: Colors.white,
-                size: 35.sp,
-              ),
-            ),
-          ),
-        ),
         Center(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                )
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: AppDimensions.d30.h,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            children: [
+
+
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.fromLTRB(16.w, 60.h, 16.w, 60.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: AppColors.white,
+
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 15,
+                    )
+                  ],
                 ),
-                Center(
-                    child: const Text("Welcome Back").extrabold(
-                        color: Colors.black, size: AppDimensions.d22.sp,letterSpacing: 1)),
-                SizedBox(
-                  height: AppDimensions.d30.h,
-                ),
-                const Text("Enter 4-digit Pin")
-                    .semiBold(color: Colors.black, size: AppDimensions.d15.sp),
-                SizedBox(height: 10.h),
-                TextField(
-                  style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color:AppColors.fontColor,
-                  ),
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.password,color: AppColors.colorF6500E2,),
-                      filled: true,
-                      fillColor: AppColors.white,
-                      hintText: "Enter your Pin",
-                      hintStyle: GoogleFonts.roboto(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w900,
-                        color: AppColors.fontColor.withOpacity(0.4),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(AppDimensions.d10.r),
-                          borderSide: const BorderSide(color: AppColors.colorDAD6D6,width: 2)
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(AppDimensions.d10.r),
-                          borderSide: const BorderSide(color: AppColors.colorDAD6D6,width: 2)
-                      )
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    GestureDetector(
-                      onTap: (){
-                        
-                        Navigator.pushNamed(context, AppNames.resetPassword);
-                      }
-                      
-                      ,child: const Text("Forgot Pin?").bold(
-                          color: AppColors.fontColor, size: AppDimensions.d15.sp,letterSpacing: 1),
+
+                    /// TITLE
+                    Text(
+                      "Welcome Back",
+
+                    ).extrabold(color: Colors.black,size: 22.sp,letterSpacing: 2),
+
+                    SizedBox(height: 20.h),
+
+                    Text(
+                      "Enter 4-digit PIN",
+                    ).extrabold(color: Colors.black,size: 15.sp,letterSpacing: 1),
+
+                    SizedBox(height: 15.h),
+
+
+                    TextField(
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color:AppColors.fontColor,
+                      ),
+                      decoration: InputDecoration(
+
+                          filled: true,
+                          fillColor: AppColors.white,
+                          hintText: "Enter your LifeID",
+                          hintStyle: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.fontColor.withOpacity(0.4),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+                              borderSide: BorderSide(color: AppColors.colorDAD6D6,width: 2)
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(AppDimensions.d10.r),
+                              borderSide: BorderSide(color: AppColors.colorDAD6D6,width: 2)
+                          )
+                      ),
+                    ),
+
+                    SizedBox(height: 10.h),
+
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, AppNames.resetPassword);
+                        }
+                       , child: Text(
+                          "Forgot PIN?",
+
+                        ).medium(color: AppColors.fontColor,size: 15.sp,letterSpacing: 1),
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: AppDimensions.d30.h,
+              ),
+
+              /// 👤 AVATAR
+              Positioned(
+                top: -40.h,
+                child: CircleAvatar(
+                  radius: 40.r,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 34.r,
+                    backgroundImage: AssetImage(AppImages.courseTeacher),
+                  ),
                 ),
-              ],
-            ),
-          ).paddingHorizontal(AppDimensions.d20.w),
-        ),
-        Positioned(
-          bottom: 520.h,// adjust according to UI
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Container(
-              height: 70.h,
-              width: 70.w,
-              decoration: BoxDecoration(
-                color: AppColors.scaffoldGradientStart,
-
-                shape: BoxShape.circle,
-
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.scaffoldGradientStart.withOpacity(0.4),
-                    blurRadius: 20,
-                    spreadRadius: 4,
-                  )
-                ],
               ),
-              child: CircleAvatar(
-                child: Image.asset(AppImages.courseTeacher),
-                
+
+              /// 🟣 FINGERPRINT BUTTON
+              Positioned(
+                bottom: -35.h,
+                child: Container(
+                  height: 70.h,
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.scaffoldGradientStart,
+                        AppColors.scaffoldGradientStart.withOpacity(0.7),
+                      ],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.scaffoldGradientStart.withOpacity(0.4),
+                        blurRadius: 20,
+                      )
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.fingerprint,
+                    color: Colors.white,
+                    size: 35.sp,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
-        Positioned(
-          bottom: 280.h, // adjust according to UI
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Container(
-              height: 70.h,
-              width: 70.w,
-              decoration: BoxDecoration(
-                color: AppColors.scaffoldGradientStart,
-                borderRadius: BorderRadius.circular(20.r),
 
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.scaffoldGradientStart.withOpacity(0.4),
-                    blurRadius: 20,
-                    spreadRadius: 4,
-                  )
-                ],
-              ),
-              child: Icon(
-                Icons.fingerprint,
-                color: Colors.white,
-                size: 35.sp,
-              ),
-            ),
-          ),
-        ),
       ],
     ));
   }

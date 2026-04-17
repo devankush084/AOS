@@ -44,14 +44,14 @@ class MyApp extends ConsumerWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
-
-          home:OTPVerificationScreen(),
-
-
+          //
+          // home:OTPVerificationScreen(),
 
 
-          // initialRoute: AppNames.login,
-          // onGenerateRoute: AppRouter.generateRoute,
+
+
+          initialRoute: AppNames.login,
+          onGenerateRoute: AppRouter.generateRoute,
 
           builder: (context, child) {
             return NetworkListener(
