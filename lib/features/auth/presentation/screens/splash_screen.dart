@@ -25,11 +25,17 @@ class SplashScreen extends ConsumerWidget {
         final isFirst = await controller.isFirstTime();
 
         if (!context.mounted) return;
-
         if (isFirst) {
           Navigator.pushReplacementNamed(context, AppNames.onboarding);
         } else {
-          Navigator.pushReplacementNamed(context, AppNames.welcome);
+          final isLoggedIn = await controller.isLoggedIn();
+
+          if (isLoggedIn) {
+            Navigator.pushReplacementNamed(
+                context, AppNames.FloatingNavBar2); // 🔥 MAIN SCREEN
+          } else {
+            Navigator.pushReplacementNamed(context, AppNames.welcome);
+          }
         }
       }
     });

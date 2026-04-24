@@ -10,4 +10,6 @@ class AppNames{
   static const String createPinScreen = "/CreatePinScreen";
   static const String welcomeBack = "/WelcomeBackScreen";
   static const String resetPassword = "/ResetPasswordScreen";
+  static const String FloatingNavBar2 = "/FloatingNavBar2";
+
 }

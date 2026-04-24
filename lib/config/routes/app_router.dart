@@ -13,6 +13,7 @@ import '../../features/auth/presentation/screens/forgot_password_screen.dart';
 import '../../features/auth/presentation/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/screens/reset_password_screen.dart';
 import '../../features/auth/presentation/screens/welcome_screen.dart';
+import '../../features/dashboard/presentation/widgets/bottom_navigation_bar.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -45,6 +46,8 @@ class AppRouter {
         return _materialRoute(const WelcomeScreen());
       case AppNames.ResetSuccessScreen:
         return _materialRoute(const ResetSuccessScreen());
+      case AppNames.FloatingNavBar2:
+        return _materialRoute(const FloatingNavBarPro());
 
       default:
         return _materialRoute(

@@ -9,7 +9,7 @@ class MyCoursesSection extends StatelessWidget {
     final cardWidth = (screenWidth - 100) / 2.2;
 
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       itemCount: 5,
@@ -56,9 +56,7 @@ class _CourseItem extends StatelessWidget {
                 blurRadius: 5,
                 offset: const Offset(0, 5),
               ),
-            ]
-
-        ),
+            ]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -80,7 +78,6 @@ class _CourseItem extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -95,19 +92,15 @@ class _CourseItem extends StatelessWidget {
                 ),
               ],
             ),
-
-
-
-
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Progress"),
-
                 const SizedBox(width: 29),
                 Text("50%")
               ],
             ),
-            const SizedBox(height:10),
+            const SizedBox(height: 10),
             LinearProgressIndicator(
               value: 0.8,
               borderRadius: BorderRadius.circular(10),

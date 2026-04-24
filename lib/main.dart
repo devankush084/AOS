@@ -52,7 +52,7 @@ class MyApp extends ConsumerWidget {
 
 
 
-          initialRoute: AppNames.login,
+          initialRoute: AppNames.splash,
           onGenerateRoute: AppRouter.generateRoute,
 
           builder: (context, child) {

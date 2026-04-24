@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../Core/constants/app_images.dart';
 import '../providers/auth_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends ConsumerWidget {
   LoginScreen({super.key});
@@ -120,8 +121,16 @@ class LoginScreen extends ConsumerWidget {
                       ),
                     ),
                     child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context,AppNames.otp);
+                        onPressed: () async {
+                          /// 🔥 SAVE LOGIN STATE
+                          final prefs = await SharedPreferences.getInstance();
+                          await prefs.setBool('isLoggedIn', true);
+
+                          /// 🔥 OPTIONAL (FIRST TIME COMPLETE)
+                          await prefs.setBool('isFirstTime', false);
+
+                          /// 🔥 NAVIGATE
+                          Navigator.pushNamed(context, AppNames.otp);
                         },
                         style: ButtonStyle(
                             shape: WidgetStatePropertyAll(

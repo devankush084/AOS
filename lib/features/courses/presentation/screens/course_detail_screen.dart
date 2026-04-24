@@ -87,7 +87,6 @@ class _CourseDetailScreenState
 
                   SizedBox(height: AppDimensions.d20.h),
 
-                  /// 🔹 CHIPS
                   Wrap(
                     spacing: AppDimensions.d10.w,
                     runSpacing: AppDimensions.d10.h,

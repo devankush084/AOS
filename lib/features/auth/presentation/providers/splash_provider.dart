@@ -21,12 +21,17 @@ class SplashController extends StateNotifier<bool> {
 
     return isFirst;
   }
+
+  /// 🔥 ✅ ADD THIS (IMPORTANT)
+  Future<bool> isLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+  }
 }
 
 final splashProvider =
-    StateNotifierProvider<SplashController, bool>((ref) => SplashController());
+StateNotifierProvider<SplashController, bool>((ref) => SplashController());
 
-/// INIT
 final splashInitProvider = Provider<void>((ref) {
   final controller = ref.read(splashProvider.notifier);
 
