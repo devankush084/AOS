@@ -6,6 +6,11 @@ import '../../../dashboard/presentation/screens/dashboard_screen.dart';
 import '../../../courses/presentation/screens/course_overview_screen.dart';
 import '../../../ai/presentation/screens/ai_tutor.dart';
 import '../../../courses/presentation/screens/course_detail_screen.dart';
+<<<<<<< HEAD
+=======
+import '../../../profile/presentation/screens/profile_screen.dart';
+import '../../../settings/presentation/screens/settings_screen.dart';
+>>>>>>> 198a8b0 (S1 final work)
 
 class FloatingNavBarPro extends StatefulWidget {
   const FloatingNavBarPro({super.key});
@@ -22,8 +27,13 @@ class _FloatingNavBarProState extends State<FloatingNavBarPro> {
     StudentDashboard(),   // 0 → Home
     MyBooksScreen(),      // 1 → Courses
     AiTutorScreen(),      // 2 → Chatbot
+<<<<<<< HEAD
     CourseDetailScreen(), // 3 → Profile (temp)
     Container(),          // 4 → Settings
+=======
+    ProfileScreen(), // 3 → Profile (temp)
+    SettingsScreen(),          // 4 → Settings
+>>>>>>> 198a8b0 (S1 final work)
   ];
 
   bool isTablet(BuildContext context) =>

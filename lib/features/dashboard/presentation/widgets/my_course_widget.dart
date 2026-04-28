@@ -1,38 +1,52 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyCoursesSection extends StatelessWidget {
   const MyCoursesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final cardWidth = (screenWidth - 100) / 2.2;
+    final courses = [
+      {"title": "Flutter UI Mastery", "progress": 0.5},
+      {"title": "Advanced Animations", "progress": 0.7},
+      {"title": "Clean Architecture", "progress": 0.3},
+      {"title": "State Management Pro", "progress": 0.8},
+      {"title": "API Integration", "progress": 0.4},
+    ];
 
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-      scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(),
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 12),
-          child: _CourseItem(
-            title: 'Course Learning ${index + 1}',
-            progress: [0.5, 0.5, 0.5, 0.75, 0.25][index],
-            width: cardWidth,
-          ),
-        );
-      },
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return SizedBox(
+      height: 170.h,
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 1.w),
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: courses.length,
+        itemBuilder: (context, index) {
+          final course = courses[index];
+
+          return Padding(
+            padding: EdgeInsets.only(right: 12.w),
+            child: CourseItem(
+              width: screenWidth * 0.42, // 🔥 RESPONSIVE WIDTH
+              title: course["title"] as String,
+              progress: course["progress"] as double,
+            ),
+          );
+        },
+      ),
     );
   }
 }
-
-class _CourseItem extends StatelessWidget {
+class CourseItem extends StatelessWidget {
   final String title;
   final double progress;
   final double width;
 
-  const _CourseItem({
+  const CourseItem({
+    super.key,
     required this.title,
     required this.progress,
     required this.width,
@@ -40,6 +54,7 @@ class _CourseItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return SizedBox(
       width: width,
       child: Container(
@@ -63,9 +78,36 @@ class _CourseItem extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+=======
+    return Container(
+      width: width, // ✅ responsive
+      padding: EdgeInsets.all(10.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18.r),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          )
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          /// IMAGE
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.r),
+            child: Stack(
+>>>>>>> 198a8b0 (S1 final work)
               children: [
-                Container(
+                Image.asset(
+                  "assets/images/Course1.png",
+                  height: 70.h, // 🔥 balanced
                   width: double.infinity,
+<<<<<<< HEAD
                   height: 100,
                   decoration: BoxDecoration(
                     color: const Color(0xFF4A6AFF).withOpacity(0.1),
@@ -76,40 +118,63 @@ class _CourseItem extends StatelessWidget {
                     child: Image.asset(
                       "assets/images/Course1.png",
                       fit: BoxFit.cover,
+=======
+                  fit: BoxFit.cover,
+                ),
+
+                Positioned(
+                  right: 6.w,
+                  top: 6.h,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 6.w, vertical: 3.h),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Text(
+                      "${(progress * 100).toInt()}%",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+>>>>>>> 198a8b0 (S1 final work)
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF2D2D2D),
-                  ),
-                ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Progress"),
-                const SizedBox(width: 29),
-                Text("50%")
-              ],
+          ),
+
+          SizedBox(height: 8.h),
+
+          /// TITLE
+          Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF2E2E2E),
             ),
-            const SizedBox(height: 10),
-            LinearProgressIndicator(
-              value: 0.8,
-              borderRadius: BorderRadius.circular(10),
-              backgroundColor: Colors.grey[300],
-              color: Color(0xFF6500E2),
-              minHeight: 6,
+          ),
+
+          SizedBox(height: 8.h),
+
+          /// PROGRESS BAR
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.r),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 5.h,
+              backgroundColor: Colors.grey.shade300,
+              valueColor:
+              AlwaysStoppedAnimation(Color(0xFF5A41F5)),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

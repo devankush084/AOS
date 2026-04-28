@@ -48,6 +48,34 @@ class AppRouter {
         return _materialRoute(const ResetSuccessScreen());
       case AppNames.FloatingNavBar2:
         return _materialRoute(const FloatingNavBarPro());
+<<<<<<< HEAD
+=======
+
+      case AppNames.courseVideoScreen:
+        return _materialRoute(const CourseVideoScreen());
+
+      case AppNames.courseModuleScreen:
+        return _materialRoute(const CourseModuleScreen());
+
+      case AppNames.courseOverviewScreen:
+        return _materialRoute(const CourseOverviewScreen());
+
+      case AppNames.assessmentResultScreen:
+        return _materialRoute(const AssessmentResultScreen());
+
+      case AppNames.downloadScreen:
+        return _materialRoute(const DownloadScreen());
+
+      case AppNames.notificationScreen:
+        return _materialRoute(const NotificationScreen());
+
+      case AppNames.profileScreen:
+        return _materialRoute(const ProfileScreen());
+
+      case AppNames.studentDashboard:
+        return _materialRoute(const StudentDashboard());
+
+>>>>>>> 198a8b0 (S1 final work)
 
       default:
         return _materialRoute(

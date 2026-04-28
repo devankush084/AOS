@@ -1,5 +1,5 @@
-import 'package:aos/Core/utils/app_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationWidget extends StatelessWidget {
   const NotificationWidget({super.key});
@@ -7,84 +7,107 @@ class NotificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 1.w, vertical: 10.h),
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Color(0xFFA8A6A6)),
+        borderRadius: BorderRadius.circular(20.r),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.12),
+            blurRadius: 15,
+            offset: Offset(0, 8),
+          )
+        ],
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blue[100],
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 4,
-                      offset: Offset(1, 2),
-                    ),
-                  ],
-                ),
-                child: Icon(
-                  Icons.notifications,
-                  size: 30,
-                  color: Colors.blue,
-                ).paddingAll(5),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Notification").bold(color: Color(0xFF4E4E4E), size: 16),
-                  Text(
-                    "Get help with lessons study guidance",
-                  ).bold(color: Color(0xFF4E4E4E), size: 14),
-                ],
-              ),
-              Text("1hrs ago").bold(color: Color(0xFF4E4E4E), size: 14),
-            ],
+          _notificationItem(
+            icon: Icons.notifications,
+            color: Colors.blue,
+            bgColor: Colors.blue.shade100,
+            title: "New Update",
+            subtitle: "Your course progress has been updated",
+            time: "1 hr ago",
           ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.orange[100],
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 4,
-                      offset: Offset(1, 2),
-                    ),
-                  ],
-                ),
-                child: Icon(
-                  Icons.messenger,
-                  size: 30,
-                  color: Colors.orange,
-                ).paddingAll(5),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Notification").bold(color: Color(0xFF4E4E4E), size: 16),
-                  Text(
-                    "Get help with lessons study guidance",
-                  ).bold(color: Color(0xFF4E4E4E), size: 14),
-                ],
-              ),
-              Text("1hrs ago").bold(color: Color(0xFF4E4E4E), size: 14),
-            ],
+
+          Divider(height: 20.h),
+
+          _notificationItem(
+            icon: Icons.message,
+            color: Colors.orange,
+            bgColor: Colors.orange.shade100,
+            title: "New Message",
+            subtitle: "You received a message from mentor",
+            time: "2 hr ago",
           ),
         ],
-      ).paddingAll(10),
+      ),
+    );
+  }
+
+  Widget _notificationItem({
+    required IconData icon,
+    required Color color,
+    required Color bgColor,
+    required String title,
+    required String subtitle,
+    required String time,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        /// 🔥 ICON
+        Container(
+          height: 42.w,
+          width: 42.w,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: bgColor,
+          ),
+          child: Icon(icon, color: color, size: 20.sp),
+        ),
+
+        SizedBox(width: 10.w),
+
+        /// 🔥 TEXT
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2E2E2E),
+                ),
+              ),
+
+              SizedBox(height: 2.h),
+
+              Text(
+                subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        /// 🔥 TIME
+        Text(
+          time,
+          style: TextStyle(
+            fontSize: 11.sp,
+            color: Colors.grey,
+          ),
+        ),
+      ],
     );
   }
 }

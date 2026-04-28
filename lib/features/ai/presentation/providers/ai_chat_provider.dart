@@ -28,41 +28,67 @@ class ChatNotifier extends StateNotifier<ChatState> {
   ChatNotifier() : super(ChatState(messages: []));
 
   final List<ChatSession> _history = [];
-
   List<ChatSession> get history => _history;
 
-  String? currentChatId;
-
-  void sendMessage(String text, List<File> images, BuildContext context) {
+  /// 🔥 SEND MESSAGE
+  void sendMessage(String text, List<File> images, BuildContext context) async {
     if (text.trim().isEmpty && images.isEmpty) {
       ToastHelper.show(context, "field can't be empty");
       return;
     }
 
-    final newMessages = [
-      ...state.messages,
-      ChatMessage(
-        text: text,
-        isUser: true,
-        images: images,
-        time: TimeOfDay.now().format(context),
-      ),
-      ChatMessage(
+    /// USER MESSAGE
+    final userMessage = ChatMessage(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      text: text,
+      isUser: true,
+      images: images,
+      time: TimeOfDay.now().format(context),
+    );
+
+    state = state.copyWith(
+      messages: [...state.messages, userMessage],
+    );
+
+    /// TYPING
+    final typingMessage = ChatMessage(
+      id: "typing_${DateTime.now().millisecondsSinceEpoch}",
+      text: "",
+      isUser: false,
+      isTyping: true,
+      time: TimeOfDay.now().format(context),
+    );
+
+    state = state.copyWith(
+      messages: [...state.messages, typingMessage],
+    );
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    /// REPLACE TYPING
+    final updated = [...state.messages];
+    final index = updated.indexWhere((m) => m.isTyping);
+
+    if (index != -1) {
+      updated[index] = ChatMessage(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
         text: "AI reply for: $text",
         isUser: false,
         time: TimeOfDay.now().format(context),
-      ),
-    ];
+      );
+    }
 
-    state = state.copyWith(messages: newMessages);
+    state = state.copyWith(messages: updated);
 
+    /// SAVE CHAT
     _saveCurrentChat();
   }
 
+  /// 🔥 SAVE CHAT (FIXED)
   void _saveCurrentChat() {
     if (state.messages.isEmpty) return;
 
-    if (currentChatId == null) {
+    if (state.currentChatId == null) {
       final newSession = ChatSession(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         title: state.messages.first.text.length > 20
@@ -73,10 +99,11 @@ class ChatNotifier extends StateNotifier<ChatState> {
       );
 
       _history.insert(0, newSession);
-      currentChatId = newSession.id;
+
+      state = state.copyWith(currentChatId: newSession.id);
     } else {
       final index =
-      _history.indexWhere((chat) => chat.id == currentChatId);
+      _history.indexWhere((chat) => chat.id == state.currentChatId);
 
       if (index != -1) {
         _history[index] = ChatSession(
@@ -89,25 +116,30 @@ class ChatNotifier extends StateNotifier<ChatState> {
     }
   }
 
+  /// LOAD CHAT
   void loadChat(ChatSession session) {
-    currentChatId = session.id;
-    state = state.copyWith(messages: session.messages);
+    state = state.copyWith(
+      messages: session.messages,
+      currentChatId: session.id,
+    );
   }
 
+  /// DELETE CHAT
   void deleteChat(String id) {
     _history.removeWhere((chat) => chat.id == id);
 
-    if (currentChatId == id) {
+    if (state.currentChatId == id) {
       clearChat();
     }
   }
 
+  /// CLEAR CHAT
   void clearChat() {
     state = state.copyWith(
       messages: [],
       editingIndex: null,
+      currentChatId: null,
     );
-    currentChatId = null;
   }
 
   void clearAllHistory() {
@@ -115,11 +147,13 @@ class ChatNotifier extends StateNotifier<ChatState> {
     clearChat();
   }
 
+  /// COPY
   void copyMessage(String text, BuildContext context) {
     Clipboard.setData(ClipboardData(text: text));
     ToastHelper.show(context, "Message copied");
   }
 
+  /// EDIT
   void startEditing(int index) {
     state = state.copyWith(editingIndex: index);
   }
@@ -129,10 +163,10 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
     final updatedMessages = [...state.messages];
     final index = state.editingIndex!;
-
     final oldMessage = updatedMessages[index];
 
     updatedMessages[index] = ChatMessage(
+      id: oldMessage.id,
       text: newText,
       isUser: oldMessage.isUser,
       images: oldMessage.images,
@@ -144,7 +178,15 @@ class ChatNotifier extends StateNotifier<ChatState> {
       editingIndex: null,
     );
 
-    /// 🔥 update history after edit
+    _saveCurrentChat();
+  }
+
+  /// DELETE MESSAGE
+  void deleteMessage(String id) {
+    state = state.copyWith(
+      messages: state.messages.where((m) => m.id != id).toList(),
+    );
+
     _saveCurrentChat();
   }
 }

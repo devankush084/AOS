@@ -6,6 +6,10 @@ import 'package:aos/features/dashboard/presentation/widgets/quick_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../widgets/AiCard.dart';
+import '../widgets/CourseCard.dart';
+import '../widgets/ProfileHeader.dart';
+
 class StudentDashboard extends StatefulWidget {
   const StudentDashboard({super.key});
 
@@ -45,36 +49,22 @@ class _StudentDashboardState extends State<StudentDashboard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// 🔥 HEADER
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius:
-                            isTablet ? size.width * 0.05 : size.width * 0.08,
-                        child: const FaIcon(FontAwesomeIcons.user),
-                      ),
-                      SizedBox(width: size.width * 0.04),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Good Morning John").bold(
-                                color: Colors.white, size: isTablet ? 20 : 16),
-                            Text("Continue your learning journey").regular(
-                                color: Colors.white, size: isTablet ? 18 : 14),
-                          ],
-                        ),
-                      ),
-                    ],
+                  /// 🔹 HEADER
+                  ProfileHeader(
+                    userName: "John Doe",
+                    profileImage: "https://i.pravatar.cc/300",
                   ),
 
-                  SizedBox(height: size.height * 0.02),
+
+
 
                   /// 🔥 AI ASSISTANT
                   Text("AI Assistant")
                       .bold(size: isTablet ? 20 : 16, color: Colors.white),
 
-                  SizedBox(height: size.height * 0.02),
+                  SizedBox(height: size.height * 0.01),
 
+<<<<<<< HEAD
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -127,10 +117,14 @@ class _StudentDashboardState extends State<StudentDashboard> {
                         ),
                       ),
                     ],
+=======
+                  AiCard(
+                    onTap: () {
+                      // Navigate to AI screen
+                    },
+>>>>>>> 198a8b0 (S1 final work)
                   ),
-
-                  SizedBox(height: size.height * 0.02),
-
+                  SizedBox(height: size.height * 0.01),
                   Text("Continue Learning")
                       .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
 
@@ -139,65 +133,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
                   SizedBox(height: size.height * 0.02),
 
-                  Container(
-                    padding: EdgeInsets.all(size.width * 0.03),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
-                          blurRadius: 6,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            "assets/images/Course1.png",
-                            width: isTablet
-                                ? size.width * 0.15
-                                : size.width * 0.25,
-                            height: isTablet
-                                ? size.height * 0.12
-                                : size.height * 0.10,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(width: size.width * 0.03),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Course Title Learning")
-                                  .bold(color: Color(0xFF4E4E4E), size: 14),
-                              SizedBox(height: size.height * 0.01),
-                              LinearProgressIndicator(
-                                value: 0.8,
-                                borderRadius: BorderRadius.circular(10),
-                                backgroundColor: Colors.grey[300],
-                                color: Color(0xFF6500E2),
-                                minHeight: 6,
-                              ),
-                              SizedBox(height: size.height * 0.01),
-                              TextButton(
-                                onPressed: () {},
-                                style: const ButtonStyle(
-                                  backgroundColor: WidgetStatePropertyAll(
-                                    Color(0xFF5A41F5),
-                                  ),
-                                ),
-                                child: const Text("Resume Learning")
-                                    .bold(color: Colors.white, size: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  CourseCard(
+                    title: "Flutter Advanced UI Masterclass",
+                    image: "assets/images/Course1.png",
+                    progress: 0.8,
+                    onTap: () {},
                   ),
 
                   SizedBox(height: size.height * 0.02),
@@ -205,9 +145,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   /// 🔥 MY COURSES
                   Text("My Courses")
                       .bold(color: Color(0xFF4E4E4E), size: isTablet ? 20 : 16),
-
+                  SizedBox(height: size.height * 0.01),
                   SizedBox(
-                    height: size.height * 0.28,
+                    height: size.height * 0.17,
                     child: MyCoursesSection(),
                   ),
 

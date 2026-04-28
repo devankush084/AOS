@@ -23,8 +23,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+<<<<<<< HEAD
 import 'features/auth/presentation/screens/otp_verification_screen.dart';
 import 'features/dashboard/presentation/widgets/bottom_navigation_bar.dart'; // ✅ ADD THIS
+=======
+import 'config/routes/route_names.dart';
+
+
+>>>>>>> 198a8b0 (S1 final work)
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -47,13 +53,23 @@ class MyApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           //
+<<<<<<< HEAD
           // home:OTPVerificationScreen(),
+=======
+          // home:StudentDashboard(),
+          //
+>>>>>>> 198a8b0 (S1 final work)
 
 
 
 
           initialRoute: AppNames.splash,
           onGenerateRoute: AppRouter.generateRoute,
+
+
+          initialRoute: AppNames.splash,
+          onGenerateRoute: AppRouter.generateRoute,
+
 
           builder: (context, child) {
             return NetworkListener(
